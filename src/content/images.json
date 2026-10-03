@@ -1,0 +1,422 @@
+{
+ "/img/foot/woven-toe-ring-sage.webp": {
+  "w": 928,
+  "h": 1016
+ },
+ "/img/foot/tan-v-thong-sage.webp": {
+  "w": 928,
+  "h": 1033
+ },
+ "/img/foot/double-buckle-sage.webp": {
+  "w": 1024,
+  "h": 945
+ },
+ "/img/foot/double-buckle-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/foot/double-buckle-top.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/foot/h-strap-sage.webp": {
+  "w": 1024,
+  "h": 937
+ },
+ "/img/foot/h-strap-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/foot/h-strap-light.webp": {
+  "w": 1080,
+  "h": 1350
+ },
+ "/img/foot/h-strap-hero.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/foot/croc-buckle-sage.webp": {
+  "w": 896,
+  "h": 1054
+ },
+ "/img/foot/croc-buckle-white.webp": {
+  "w": 896,
+  "h": 1152
+ },
+ "/img/foot/navy-cross-sage.webp": {
+  "w": 1024,
+  "h": 937
+ },
+ "/img/foot/croc-cross-buckle-sage.webp": {
+  "w": 1436,
+  "h": 1700
+ },
+ "/img/foot/cross-strap-teal.webp": {
+  "w": 936,
+  "h": 947
+ },
+ "/img/foot/cross-strap-light-tall.webp": {
+  "w": 614,
+  "h": 1420
+ },
+ "/img/foot/cross-strap-sand.webp": {
+  "w": 819,
+  "h": 1065
+ },
+ "/img/foot/perforated-slide-sage.webp": {
+  "w": 849,
+  "h": 1036
+ },
+ "/img/foot/perforated-slide-sage-2.webp": {
+  "w": 1080,
+  "h": 1080
+ },
+ "/img/foot/multi-strap-thong-plinth.webp": {
+  "w": 1080,
+  "h": 1080
+ },
+ "/img/foot/cognac-cross-thong-plinth.webp": {
+  "w": 1080,
+  "h": 1080
+ },
+ "/img/foot/croc-thong-plinth.webp": {
+  "w": 1080,
+  "h": 1080
+ },
+ "/img/foot/tan-thong-plinth.webp": {
+  "w": 1080,
+  "h": 1080
+ },
+ "/img/foot/mono-thong-plinth.webp": {
+  "w": 1080,
+  "h": 1080
+ },
+ "/img/bags/professional-studio.webp": {
+  "w": 1024,
+  "h": 929
+ },
+ "/img/bags/professional-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/bags/professional-light.webp": {
+  "w": 936,
+  "h": 947
+ },
+ "/img/bags/minimalist-studio.webp": {
+  "w": 896,
+  "h": 1040
+ },
+ "/img/bags/minimalist-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/bags/explorer-studio.webp": {
+  "w": 896,
+  "h": 1054
+ },
+ "/img/bags/explorer-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/bags/burgundy-explorer-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/bags/classic-backpack-studio.webp": {
+  "w": 1024,
+  "h": 929
+ },
+ "/img/bags/classic-backpack-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/bags/traveler-studio.webp": {
+  "w": 896,
+  "h": 1054
+ },
+ "/img/bags/traveler-white.webp": {
+  "w": 1080,
+  "h": 1350
+ },
+ "/img/bags/essential-studio.webp": {
+  "w": 1024,
+  "h": 933
+ },
+ "/img/bags/essential-white.webp": {
+  "w": 1080,
+  "h": 1080
+ },
+ "/img/bags/cognac-duffel-white.webp": {
+  "w": 1080,
+  "h": 1350
+ },
+ "/img/bags/cognac-duffel-white-2.webp": {
+  "w": 1080,
+  "h": 1350
+ },
+ "/img/bags/croc-duffel-white.webp": {
+  "w": 1080,
+  "h": 1350
+ },
+ "/img/bags/onyx-croc-duffel.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/racer-duffel.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/racer-duffel-2.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/diagonal-croc-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/woven-weekender.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/croc-panel-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/slate-stripe-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/onyx-weekender.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/croc-pocket-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/woven-panel-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/heritage-flap-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/sand-canvas-duffel.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/forest-canvas-duffel.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/city-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/bags/cognac-brief.webp": {
+  "w": 1122,
+  "h": 1402
+ },
+ "/img/acc/watch-roll-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/acc/watch-roll-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/watch-roll-black.webp": {
+  "w": 1599,
+  "h": 1600
+ },
+ "/img/acc/watch-roll-black-closed.webp": {
+  "w": 1599,
+  "h": 1600
+ },
+ "/img/acc/specs-sleeve-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/acc/specs-sleeve-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/specs-case-white.webp": {
+  "w": 1024,
+  "h": 1024
+ },
+ "/img/acc/specs-case-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/specs-case-wood-2.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/hook-keychains-white.webp": {
+  "w": 656,
+  "h": 1024
+ },
+ "/img/acc/loop-keychains-dark.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/acc/loop-keychains-dark-2.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/acc/clip-keychains-dark.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/acc/drop-keychains-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/shoe-horn-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/shoe-horn-wood-2.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/pen-stand-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/card-stand-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/envelope-folios-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/envelope-folios-wood-2.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/wall-pocket-wood.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/acc/wall-pocket-mounted.webp": {
+  "w": 1279,
+  "h": 1280
+ },
+ "/img/workshop/floor-duffel.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/floor-weekender.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/bench-woven.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/cutting-mat-brief.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/croc-on-mat.webp": {
+  "w": 1400,
+  "h": 1498
+ },
+ "/img/workshop/croc-duffel-mat.webp": {
+  "w": 1600,
+  "h": 961
+ },
+ "/img/workshop/woven-closeup.webp": {
+  "w": 1180,
+  "h": 1058
+ },
+ "/img/workshop/racer-held.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/racer-held-2.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/slate-held.webp": {
+  "w": 1600,
+  "h": 1499
+ },
+ "/img/workshop/black-brief-held.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/cognac-brief-held.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/slate-brief-table.webp": {
+  "w": 718,
+  "h": 1600
+ },
+ "/img/workshop/croc-weekender-mat.webp": {
+  "w": 1600,
+  "h": 1182
+ },
+ "/img/workshop/woven-brief-held.webp": {
+  "w": 1207,
+  "h": 1600
+ },
+ "/img/insta/bags-distance.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/footwear-collection.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/minimalist.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/explorer.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/elegance.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/essential.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/traveler.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/classic.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/professional.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/insta/i-style-leathers.webp": {
+  "w": 720,
+  "h": 900
+ },
+ "/img/insta/step-into-comfort.webp": {
+  "w": 720,
+  "h": 900
+ },
+ "/img/insta/croc-buckle.webp": {
+  "w": 900,
+  "h": 900
+ },
+ "/img/brand/logo-on-leather.webp": {
+  "w": 1024,
+  "h": 1024
+ }
+}

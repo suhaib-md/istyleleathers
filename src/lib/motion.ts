@@ -1,0 +1,2 @@
+/** Runs inline in <head> before paint: resolves the motion preference onto <html data-motion>. */
+export const motionScript = `try{var m=localStorage.getItem('istyle-motion');var r=m?m==='reduced':matchMedia('(prefers-reduced-motion: reduce)').matches;document.documentElement.dataset.motion=r?'reduced':'full';if(r||sessionStorage.getItem('istyle-intro')==='1')document.documentElement.dataset.intro='seen'}catch(e){document.documentElement.dataset.motion='full'}`;
