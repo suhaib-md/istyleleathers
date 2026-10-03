@@ -10,14 +10,21 @@ import { Arrow } from "@/components/ui/Icons";
 export default function ProductCard({
   p,
   feature = false,
-  sizes = "(max-width: 768px) 50vw, 25vw",
+  sizes = "(max-width: 767px) 50vw, 25vw",
+  loading,
+  fetchPriority,
 }: {
   p: Product;
   feature?: boolean;
   sizes?: string;
+  /** for cards in the first row: on screen at load, so don't lazy-load them */
+  loading?: "eager" | "lazy";
+  fetchPriority?: "high" | "low" | "auto";
 }) {
   const card = useRef<HTMLAnchorElement>(null);
   const second = p.images[1];
+  // a feature card spans two columns of the collection grid (2 → 3 → 4 columns)
+  const imgSizes = feature ? "(min-width: 1024px) 50vw, (min-width: 768px) 66vw, 100vw" : sizes;
 
   // gentle 3D tilt toward the cursor
   const onMove = (e: React.PointerEvent) => {
@@ -53,7 +60,9 @@ export default function ProductCard({
           src={p.images[0]}
           alt={`${p.name} — ${p.line}, ${p.colour}`}
           fill
-          sizes={feature ? "(max-width: 768px) 100vw, 50vw" : sizes}
+          loading={loading}
+          fetchPriority={fetchPriority}
+          sizes={imgSizes}
           className={`object-cover transition-all duration-[1100ms] ease-out group-hover:scale-[1.04] ${second ? "group-hover:opacity-0" : ""}`}
         />
         {second && (
@@ -62,7 +71,7 @@ export default function ProductCard({
             alt=""
             aria-hidden
             fill
-            sizes={feature ? "(max-width: 768px) 100vw, 50vw" : sizes}
+            sizes={imgSizes}
             className="scale-[1.06] object-cover opacity-0 transition-all duration-[1100ms] ease-out group-hover:scale-100 group-hover:opacity-100"
           />
         )}

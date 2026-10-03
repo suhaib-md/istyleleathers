@@ -91,7 +91,7 @@ export default function CarePage() {
             </p>
           </div>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] md:col-span-4">
-            <Image src="/img/bags/heritage-flap-brief.webp" alt="A burnished tan leather flap briefcase" fill priority sizes="33vw" className="object-cover" />
+            <Image src="/img/bags/heritage-flap-brief.webp" alt="A burnished tan leather flap briefcase" fill preload sizes="33vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -118,7 +118,7 @@ export default function CarePage() {
             {by.map((b) => (
               <article key={b.t}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[3px] bg-bone">
-                  <Image src={b.img} alt={b.alt} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover" />
+                  <Image src={b.img} alt={b.alt} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover" />
                 </div>
                 <h2 className="serif mt-6 text-[36px] leading-none">{b.t}</h2>
                 <ul className="mt-5 space-y-3 text-[15.5px] opacity-80">

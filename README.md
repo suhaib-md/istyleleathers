@@ -42,7 +42,8 @@ three.js / @react-three/fiber / drei.
 - Sample / production lead times, export countries, workshop address, hours, floor area
 - Exchange / return terms, confirmed footwear sizes
 - A photo of the founder at work (placeholder box on `/story`)
-- The real domain → `site.url` in `src/content/site.ts` (used for link previews, sitemap and canonical URLs)
+
+The site's own address (canonical links, sitemap, link-preview images) needs no editing — see **Deploy**.
 
 ## Images
 
@@ -68,8 +69,17 @@ were cropped out of the AI-edited studio shots.
   Note: Windows with *Settings → Accessibility → Visual effects → Animation effects* turned **off** counts as
   "reduced motion".
 * 3D canvases pause when off-screen; three.js only downloads when a 3D section is about to scroll into view.
+  Keep it that way: import `three` only inside `components/three/*` (loaded with `next/dynamic`). A plain
+  `import … from "three"` anywhere else ships it with that route — and the nav prefetches every route.
 
 ## Deploy
 
-Push the folder to a Git repo and import it into Vercel (zero config), or run `npm run build && npm start` on any Node 20+
-host. Update `site.url` first.
+**Vercel (zero config):** push the folder to a Git repo and import it in Vercel, or run `npx vercel` from this folder.
+No environment variables are needed: canonical links, the sitemap, robots.txt and link previews follow the project's
+production address on their own — the `*.vercel.app` one, then your domain once it is added under
+*Settings → Domains*. Every page is pre-rendered, so it is all served from Vercel's edge cache.
+
+**Anywhere else:** Node 24 (`engines` in `package.json`), `npm run build && npm start`, and set
+`NEXT_PUBLIC_SITE_URL=https://your-domain` at build time.
+
+`LAUNCH_REPORT.md` has the pre-launch audit: what was fixed, what is still open, and what to check after deploying.

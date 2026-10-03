@@ -75,7 +75,7 @@ export default function TwoDoors() {
                 src={d.img}
                 alt={d.alt}
                 fill
-                sizes="(max-width: 768px) 100vw, 60vw"
+                sizes="(max-width: 767px) 100vw, 60vw"
                 className="object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.04]"
               />
             </div>

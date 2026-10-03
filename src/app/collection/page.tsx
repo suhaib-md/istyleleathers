@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import CollectionView from "@/components/catalog/CollectionView";
 import HowToOrder from "@/components/home/HowToOrder";
 
@@ -13,9 +12,7 @@ export const metadata: Metadata = {
 export default function CollectionPage() {
   return (
     <div data-nav="light" className="bg-cream">
-      <Suspense fallback={<div className="h-screen" />}>
-        <CollectionView />
-      </Suspense>
+      <CollectionView />
       <HowToOrder />
     </div>
   );

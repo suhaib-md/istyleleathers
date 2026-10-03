@@ -4,6 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 import Seam from "@/components/ui/Seam";
 import Ph from "@/components/ui/Ph";
 import QuickMessage from "@/components/contact/QuickMessage";
+import LazyMap from "@/components/contact/LazyMap";
 import { ArrowUpRight, Instagram, Mail, WhatsApp } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
@@ -116,13 +117,10 @@ export default function ContactPage() {
             </div>
           </div>
           <div className="relative min-h-[420px] overflow-hidden rounded-[3px] md:col-span-6 md:col-start-7">
-            <iframe
+            <LazyMap
               title={`Map of ${site.town}, ${site.state}`}
               src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&z=13&output=embed`}
-              className="absolute inset-0 h-full w-full border-0"
               style={{ filter: "sepia(.55) saturate(.8) contrast(1.05) brightness(.92)" }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
             />
             <div className="pointer-events-none absolute inset-3 rounded-[2px] border-[1.5px] border-dashed border-ink/40" />
             <span className="mono pointer-events-none absolute bottom-4 left-4 rounded-full bg-leather/85 px-3 py-1.5 text-cream backdrop-blur">{site.coords}</span>

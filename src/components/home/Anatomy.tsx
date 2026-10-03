@@ -80,7 +80,7 @@ export default function Anatomy() {
         <div className="mt-14 grid items-center gap-10 md:grid-cols-12">
           <div data-anat className="relative overflow-hidden rounded-[4px] bg-white md:col-span-7">
             <div data-anat-img className="relative aspect-square">
-              <Image src="/img/bags/professional-white.webp" alt="The Professional briefcase in black and tan leather" fill sizes="(max-width:768px) 100vw, 58vw" className="object-cover" />
+              <Image src="/img/bags/professional-white.webp" alt="The Professional briefcase in black and tan leather" fill sizes="(max-width: 767px) 100vw, 58vw" className="object-cover" />
             </div>
             {/* leader line from the active marker to the card */}
             {spots.map((p, i) => (

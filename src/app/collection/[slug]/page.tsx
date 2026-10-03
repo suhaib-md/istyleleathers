@@ -16,7 +16,11 @@ export async function generateMetadata(props: PageProps<"/collection/[slug]">): 
     title: `${p.name} — ${p.line}`,
     description: `${p.blurb} Handmade in Melvisharam, Tamil Nadu. ${p.colour}. Enquire on WhatsApp for price.`,
     alternates: { canonical: `/collection/${p.slug}` },
+    // a page-level openGraph replaces the layout's, so restate its shared fields
     openGraph: {
+      type: "website",
+      siteName: site.name,
+      locale: "en_IN",
       title: `${p.name} — ${p.line} | I Style Leathers`,
       description: p.blurb,
       images: [{ url: `/og/${p.slug}.jpg`, width: 1200, height: 630, alt: `${p.name} — ${p.line}` }],
@@ -42,7 +46,8 @@ export default async function ProductPage(props: PageProps<"/collection/[slug]">
   };
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {/* "<" escaped so product copy can never close the script tag early */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <ProductView p={p} />
     </>
   );

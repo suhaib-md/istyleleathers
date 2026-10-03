@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { Suspense, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { products, categories, indexOf, type Category } from "@/content/products";
 import ProductCard from "./ProductCard";
@@ -11,11 +11,21 @@ import { Arrow } from "@/components/ui/Icons";
 
 type View = "grid" | "index";
 
+/**
+ * Reads ?c= in the browser. Kept apart so it alone opts out of static rendering —
+ * calling useSearchParams in the view itself left the whole collection out of the HTML.
+ */
+function CategoryFromUrl({ onChange }: { onChange: (c: Category | null) => void }) {
+  const c = useSearchParams().get("c");
+  useLayoutEffect(() => {
+    onChange(categories.some((x) => x.key === c) ? (c as Category) : null);
+  }, [c, onChange]);
+  return null;
+}
+
 export default function CollectionView() {
-  const params = useSearchParams();
   const router = useRouter();
-  const c = (params.get("c") as Category | null) ?? null;
-  const cat = categories.some((x) => x.key === c) ? c : null;
+  const [cat, setCatState] = useState<Category | null>(null);
   const [type, setType] = useState<string | null>(null);
   const [view, setView] = useState<View>("grid");
   const grid = useRef<HTMLDivElement>(null);
@@ -28,11 +38,18 @@ export default function CollectionView() {
 
   const setCat = (k: Category | null) => {
     setType(null);
+    setCatState(k);
     router.replace(k ? `/collection?c=${k}` : "/collection", { scroll: false });
   };
 
+  // the first view arrives in the HTML, already on screen — only animate changes to it
+  const shown = useRef(false);
   useGSAP(
     () => {
+      if (!shown.current) {
+        shown.current = true;
+        return;
+      }
       if (prefersReducedMotion()) return;
       gsap.fromTo(
         "[data-item]",
@@ -55,6 +72,9 @@ export default function CollectionView() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <CategoryFromUrl onChange={setCatState} />
+      </Suspense>
       <header className="wrap pb-10 pt-32 md:pt-44">
         <p className="mono mb-6 opacity-60">(01) The collection — {products.length} pieces · price on request</p>
         <h1 className="display text-hero">
@@ -120,7 +140,13 @@ export default function CollectionView() {
           <div className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4">
             {list.map((p, i) => (
               <div key={p.slug} data-item className={i % 9 === 4 && p.images.length > 1 ? "col-span-2" : ""}>
-                <ProductCard p={p} feature={i % 9 === 4 && p.images.length > 1} />
+                <ProductCard
+                  p={p}
+                  feature={i % 9 === 4 && p.images.length > 1}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                  loading={i < 4 ? "eager" : undefined}
+                  fetchPriority={i < 2 ? "high" : undefined}
+                />
               </div>
             ))}
           </div>

@@ -39,7 +39,7 @@ export default function StoryPage() {
       <section data-nav="dark" className="on-dark relative overflow-hidden">
         <div className="absolute inset-0">
           <Parallax amount={14} className="absolute inset-[-10%_0]">
-            <Image src="/img/workshop/croc-on-mat.webp" alt="" fill priority sizes="100vw" className="object-cover opacity-45" />
+            <Image src="/img/workshop/croc-on-mat.webp" alt="" fill preload sizes="100vw" className="object-cover opacity-45" />
           </Parallax>
           <div className="absolute inset-0 bg-gradient-to-b from-leather/40 via-leather/70 to-leather" />
         </div>
@@ -146,7 +146,7 @@ export default function StoryPage() {
             {steps.map((s, i) => (
               <figure key={s.t} className="group relative bg-cream">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={s.img} alt={s.alt} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
+                  <Image src={s.img} alt={s.alt} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
                 </div>
                 <figcaption className="p-7">
                   <span className="mono text-cognac">Stage {String(i + 1).padStart(2, "0")}</span>

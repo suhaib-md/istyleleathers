@@ -287,32 +287,35 @@ function stampCanvases(text: string, useLogo: boolean) {
   const img = ctx.getImageData(0, 0, W, H).data;
   const a = new Float32Array(W * H);
   for (let i = 0; i < W * H; i++) a[i] = img[i * 4] / 255;
-  // soft blur for bevel
+  // soft blur for bevel: a (2R+1) box with clamped edges, kept as running sums so each pixel costs
+  // the same however wide the box (this runs on every keystroke in the stamp field)
+  const R = 3,
+    n = R * 2 + 1;
   const b = new Float32Array(W * H);
-  const R = 3;
-  for (let y = 0; y < H; y++)
+  for (let y = 0; y < H; y++) {
+    const row = y * W;
+    let s = 0;
+    for (let k = -R; k <= R; k++) s += a[row + Math.min(W - 1, Math.max(0, k))];
     for (let x = 0; x < W; x++) {
-      let s = 0,
-        n = 0;
-      for (let k = -R; k <= R; k++) {
-        const xx = Math.min(W - 1, Math.max(0, x + k));
-        s += a[y * W + xx];
-        n++;
-      }
-      b[y * W + x] = s / n;
+      b[row + x] = s / n;
+      s += a[row + Math.min(W - 1, x + R + 1)] - a[row + Math.max(0, x - R)];
     }
+  }
   const bb = new Float32Array(W * H);
-  for (let y = 0; y < H; y++)
+  const col = new Float64Array(W);
+  for (let k = -R; k <= R; k++) {
+    const row = Math.min(H - 1, Math.max(0, k)) * W;
+    for (let x = 0; x < W; x++) col[x] += b[row + x];
+  }
+  for (let y = 0; y < H; y++) {
+    const row = y * W,
+      add = Math.min(H - 1, y + R + 1) * W,
+      sub = Math.max(0, y - R) * W;
     for (let x = 0; x < W; x++) {
-      let s = 0,
-        n = 0;
-      for (let k = -R; k <= R; k++) {
-        const yy = Math.min(H - 1, Math.max(0, y + k));
-        s += b[yy * W + x];
-        n++;
-      }
-      bb[y * W + x] = s / n;
+      bb[row + x] = col[x] / n;
+      col[x] += b[add + x] - b[sub + x];
     }
+  }
   const alpha = new Uint8Array(W * H * 4);
   const normal = new Uint8Array(W * H * 4);
   for (let y = 0; y < H; y++)
@@ -347,6 +350,18 @@ function stampCanvases(text: string, useLogo: boolean) {
     return tx;
   };
   return { alpha: mk(alpha), normal: mk(normal) };
+}
+
+export type StampTextures = ReturnType<typeof stampCanvases>;
+
+/** The footbed stamp's textures — build once per pair and hand the same set to both feet. */
+export function useStampTextures(text: string, useLogo: boolean) {
+  const stamp = useMemo(() => (typeof window === "undefined" ? null : stampCanvases(text, useLogo)), [text, useLogo]);
+  useEffect(() => () => {
+    stamp?.alpha.dispose();
+    stamp?.normal.dispose();
+  }, [stamp]);
+  return stamp;
 }
 
 // ───────────────────────── component ─────────────────────────
@@ -384,7 +399,7 @@ function useLeatherMat(color: string, finish: Finish, repeat: number, seed: numb
   return mat;
 }
 
-export function SandalModel({ config, mirror = false }: { config: SandalConfig; mirror?: boolean }) {
+export function SandalModel({ config, stamp, mirror = false }: { config: SandalConfig; stamp: StampTextures | null; mirror?: boolean }) {
   const bedOutline = useMemo(() => outlinePoints(0.955, 0.972, 260), []);
   const soleGeo = useMemo(() => extruded(outlinePoints(1, 1), SOLE_D, 0.02), []);
   const bedGeo = useMemo(() => {
@@ -431,14 +446,6 @@ export function SandalModel({ config, mirror = false }: { config: SandalConfig; 
   }, [config.hardware, metalMat]);
 
   // stamp decal
-  const stamp = useMemo(
-    () => (typeof window === "undefined" ? null : stampCanvases(config.stamp, config.stampLogo)),
-    [config.stamp, config.stampLogo]
-  );
-  useEffect(() => () => {
-    stamp?.alpha.dispose();
-    stamp?.normal.dispose();
-  }, [stamp]);
   const stampMat = useMemo(() => new THREE.MeshPhysicalMaterial({ transparent: true, depthWrite: false }), []);
   useEffect(() => {
     if (!stamp) return;

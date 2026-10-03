@@ -25,18 +25,18 @@ export default function Place() {
   useLayoutEffect(() => {
     const p = path.current!;
     const L = p.getTotalLength();
+    // the river only ever runs left → right, so x grows along its length: binary-search each town's x.
+    // (Walking the whole path per town meant ~3,700 getPointAtLength calls — a multi-second freeze on phones.)
     const found = towns.map((t) => {
-      let best = { x: t.x, y: 250 },
-        bd = 1e9;
-      for (let s = 0; s <= L; s += 2) {
-        const q = p.getPointAtLength(s);
-        const d = Math.abs(q.x - t.x);
-        if (d < bd) {
-          bd = d;
-          best = { x: q.x, y: q.y };
-        }
+      let lo = 0,
+        hi = L;
+      for (let i = 0; i < 20; i++) {
+        const mid = (lo + hi) / 2;
+        if (p.getPointAtLength(mid).x < t.x) lo = mid;
+        else hi = mid;
       }
-      return best;
+      const q = p.getPointAtLength(hi);
+      return { x: q.x, y: q.y };
     });
     setPts(found);
   }, []);

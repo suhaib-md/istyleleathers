@@ -182,10 +182,16 @@ async function logoTexture(src: string, height = 760) {
   const id = ctx.getImageData(0, 0, W, H).data;
   const a = new Float32Array(W * H);
   for (let i = 0; i < W * H; i++) a[i] = id[i * 4 + 3] / 255;
+  // ~0.5M pixels per pass: hand the main thread back between passes so the page stays responsive
+  const breathe = () => new Promise<void>((r) => setTimeout(r, 0));
+  await breathe();
   let b1 = boxBlur(a, W, H, 2);
   b1 = boxBlur(b1, W, H, 2);
+  await breathe();
   let b2 = boxBlur(a, W, H, 9);
+  await breathe();
   b2 = boxBlur(b2, W, H, 9);
+  await breathe();
   const data = new Uint8Array(W * H * 4);
   for (let i = 0; i < W * H; i++) {
     data[i * 4] = a[i] * 255;
@@ -327,7 +333,12 @@ export default function LeatherHero({ className = "" }: { className?: string }) 
       uniforms.uFade.value = Math.max(0.35, Math.min(1, 1 + b.top / (b.height * 1.1)));
       renderer.render(scene, camera);
     };
-    loop();
+    // compile the shader in the background where the browser can (KHR_parallel_shader_compile) instead of
+    // stalling the first frame; the solid leather colour behind the canvas shows until it is ready
+    renderer
+      .compileAsync(scene, camera)
+      .catch(() => {})
+      .then(() => alive && loop());
 
     return () => {
       alive = false;

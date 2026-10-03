@@ -112,8 +112,8 @@ export default function ProductView({ p }: { p: Product }) {
                   src={src}
                   alt={`${p.name} — view ${i + 1}`}
                   fill
-                  priority={i === 0}
-                  sizes="(max-width: 768px) 100vw, 58vw"
+                  preload={i === 0}
+                  sizes="(max-width: 767px) 100vw, 58vw"
                   className="object-cover transition-transform duration-[1600ms] ease-out hover:scale-[1.06]"
                 />
               </button>

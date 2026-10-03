@@ -6,12 +6,22 @@
  * here and it updates everywhere.
  */
 
+/**
+ * The public address — canonical links, the sitemap and link-preview images are built from it.
+ * On Vercel it follows the project's production domain by itself (the *.vercel.app address until
+ * a custom domain is added). Set NEXT_PUBLIC_SITE_URL to pin it anywhere else.
+ */
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000")
+).replace(/\/+$/, "");
+
 export const site = {
   name: "I Style Leathers",
   short: "I Style",
   tagline: "Timeless Style",
   motto: "Where craftsmanship means timeless fashion.",
-  url: "https://istyleleathers.in", // [confirm domain]
+  url: siteUrl,
 
   phoneDisplay: "+91 98423 76554",
   whatsapp: "919842376554",

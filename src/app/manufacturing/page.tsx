@@ -98,9 +98,17 @@ export default function ManufacturingPage() {
           </div>
         </div>
         <Marquee duration={70} className="pb-16">
-          {strip.map((p) => (
+          {strip.map((p, i) => (
             <div key={p.slug} className="relative mr-4 aspect-[4/5] w-[42vw] shrink-0 overflow-hidden rounded-[2px] sm:w-[22vw] lg:w-[15vw]">
-              <Image src={p.images[0]} alt="" fill sizes="22vw" className="object-cover" />
+              {/* sizes mirrors the widths above; the first few are on screen at load, so they don't wait to load */}
+              <Image
+                src={p.images[0]}
+                alt=""
+                fill
+                loading={i < 7 ? "eager" : undefined}
+                sizes="(min-width: 1024px) 15vw, (min-width: 640px) 22vw, 42vw"
+                className="object-cover"
+              />
             </div>
           ))}
         </Marquee>
@@ -117,7 +125,7 @@ export default function ManufacturingPage() {
             {capabilities.map((c, i) => (
               <article key={c.t} data-fade className="group">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone">
-                  <Image src={c.img} alt={c.alt} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
+                  <Image src={c.img} alt={c.alt} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover transition-transform duration-[1400ms] group-hover:scale-105" />
                   <span className="mono absolute left-4 top-4 rounded-full bg-cream/90 px-3 py-1.5 text-ink">0{i + 1}</span>
                 </div>
                 <h3 className="serif mt-6 text-[40px] leading-none">{c.t}</h3>

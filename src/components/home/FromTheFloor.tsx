@@ -67,7 +67,7 @@ export default function FromTheFloor({ index = "11", limit = 8 }: { index?: stri
                       alt={s.alt}
                       width={d.w}
                       height={d.h}
-                      sizes="(max-width: 768px) 50vw, 25vw"
+                      sizes="(max-width: 767px) 50vw, 25vw"
                       className="h-auto w-full object-cover grayscale-[35%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale-0"
                       style={{ aspectRatio: d.w / d.h > 1 ? "1 / 1" : "3 / 5" }}
                     />

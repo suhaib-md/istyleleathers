@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useMemo, useRef, useState } from "react";
-import * as THREE from "three";
+import type { WebGLRenderer } from "three";
 import type { SandalConfig, Silhouette, StampStyle } from "@/components/three/Sandal";
 import type { Finish } from "@/content/materials";
 import {
@@ -56,6 +56,17 @@ const DEFAULT: UI = {
   stampLogo: false,
 };
 
+/**
+ * Same result as THREE.Color(hex).multiplyScalar(k).getHexString() — the scaling happens in linear light —
+ * without a static three import, which made every page prefetch three.js through the nav's Atelier link.
+ */
+function darken(hex: string, k: number) {
+  const lin = (c: number) => (c < 0.04045 ? c * 0.0773993808 : Math.pow(c * 0.9478672986 + 0.0521327014, 2.4));
+  const srgb = (c: number) => (c < 0.0031308 ? c * 12.92 : 1.055 * Math.pow(c, 0.41666) - 0.055);
+  const n = parseInt(hex.slice(1), 16);
+  return [16, 8, 0].map((s) => Math.round(Math.min(1, Math.max(0, srgb(lin(((n >> s) & 255) / 255) * k))) * 255).toString(16).padStart(2, "0")).join("");
+}
+
 function specCode(c: UI) {
   const s = JSON.stringify(c);
   let h = 2166136261;
@@ -95,9 +106,9 @@ function Group({ n, title, value, children }: { n: string; title: string; value?
   return (
     <div className="border-b border-ink/10 py-6">
       <div className="mb-4 flex items-baseline justify-between gap-3">
-        <h3 className="mono flex gap-3">
+        <h2 className="mono flex gap-3">
           <span className="opacity-40">{n}</span> {title}
-        </h3>
+        </h2>
         {value && <span className="serif text-[19px] italic">{value}</span>}
       </div>
       {children}
@@ -107,12 +118,12 @@ function Group({ n, title, value, children }: { n: string; title: string; value?
 
 export default function Configurator() {
   const [c, setC] = useState<UI>(DEFAULT);
-  const gl = useRef<THREE.WebGLRenderer | null>(null);
+  const gl = useRef<WebGLRenderer | null>(null);
   const set = <K extends keyof UI>(k: K, v: UI[K]) => setC((p) => ({ ...p, [k]: v }));
 
   const threadColor = useMemo(() => {
     if (c.thread !== "tonal") return c.thread;
-    return "#" + new THREE.Color(c.strap).multiplyScalar(0.7).getHexString();
+    return "#" + darken(c.strap, 0.7);
   }, [c.thread, c.strap]);
 
   const config: SandalConfig = useMemo(

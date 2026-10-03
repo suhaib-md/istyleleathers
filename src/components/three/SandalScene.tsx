@@ -4,10 +4,11 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Lightformer, OrbitControls } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { SandalModel, type SandalConfig } from "./Sandal";
+import { SandalModel, useStampTextures, type SandalConfig } from "./Sandal";
 
 function Pair({ config, float }: { config: SandalConfig; float: boolean }) {
   const g = useRef<THREE.Group>(null);
+  const stamp = useStampTextures(config.stamp, config.stampLogo);
   useFrame(({ clock }) => {
     if (!float || !g.current) return;
     g.current.position.y = Math.sin(clock.elapsedTime * 0.8) * 0.03;
@@ -15,13 +16,23 @@ function Pair({ config, float }: { config: SandalConfig; float: boolean }) {
   return (
     <group ref={g}>
       <group position={[0.58, 0, 0.12]} rotation={[0, -0.08, 0]}>
-        <SandalModel config={config} />
+        <SandalModel config={config} stamp={stamp} />
       </group>
       <group position={[-0.58, 0, -0.12]} rotation={[0, 0.08, 0]}>
-        <SandalModel config={config} mirror />
+        <SandalModel config={config} stamp={stamp} mirror />
       </group>
     </group>
   );
+}
+
+/** A still pair (only the camera orbits) casts the same shadows every frame — redraw them when the design changes. */
+function ShadowsOnChange({ version }: { version: unknown }) {
+  const gl = useThree((s) => s.gl);
+  useEffect(() => {
+    gl.shadowMap.autoUpdate = false;
+    gl.shadowMap.needsUpdate = true;
+  }, [gl, version]);
+  return null;
 }
 
 /**
@@ -111,7 +122,9 @@ export default function SandalScene({
         </Environment>
         <Floor color={backdrop} />
         <Pair config={config} float={!interactive} />
-        <ContactShadows position={[0, 0.002, 0]} opacity={0.55} scale={7} blur={2.2} far={2} resolution={1024} />
+        {interactive && <ShadowsOnChange version={config} />}
+        {/* frames={1}: drawn once, and again each time this scene re-renders with a new design */}
+        <ContactShadows position={[0, 0.002, 0]} opacity={0.55} scale={7} blur={2.2} far={2} resolution={1024} frames={interactive ? 1 : Infinity} />
         <OrbitControls
           enabled={interactive}
           enablePan={false}

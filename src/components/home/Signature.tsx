@@ -109,7 +109,7 @@ export default function Signature() {
                     src={p.images[0]}
                     alt={`${p.name} — ${p.line}`}
                     fill
-                    sizes="(max-width: 900px) 72vw, 26vw"
+                    sizes="(min-width: 768px) 26vw, 72vw"
                     className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.05]"
                   />
                 </div>
